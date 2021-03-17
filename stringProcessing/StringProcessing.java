@@ -87,29 +87,18 @@ public class StringProcessing {
         String current_string;
         String result_string = "";
         try {
-            if(resulting_string.size() > 2 && !resulting_string.get(resulting_string.size() - 1).equals("[") &&
-                    !isNumeric(resulting_string.get(resulting_string.size() - 1))){
+            if(resulting_string.size() > 2){
                 // запоминаем строку и удаляем ее из стека
                 current_string = resulting_string.get(resulting_string.size() - 1);
                 resulting_string.remove(resulting_string.size() - 1);
-                if(resulting_string.get(resulting_string.size() - 1).equals("[")){
-                    // удаляем из стека открывающуюся скобку
-                    resulting_string.remove(resulting_string.size() - 1);
-                    if(isNumeric(resulting_string.get(resulting_string.size() - 1))){
-                        // удаляем число повторений и записываем новую строку
-                        for (int i = 0; i < Integer.parseInt(resulting_string.get(resulting_string.size() - 1)); i++){
-                            result_string += current_string;
-                        }
-                        resulting_string.remove(resulting_string.size() - 1);
-                        letterHandling(result_string);
-                    }
-                    else {
-                        throw new ExceptionClosingBracketInput();
-                    }
+                // удаляем из стека открывающуюся скобку
+                resulting_string.remove(resulting_string.size() - 1);
+                // удаляем число повторений и записываем новую строку
+                for (int i = 0; i < Integer.parseInt(resulting_string.get(resulting_string.size() - 1)); i++){
+                    result_string += current_string;
                 }
-                else {
-                    throw  new ExceptionClosingBracketInput();
-                }
+                resulting_string.remove(resulting_string.size() - 1);
+                letterHandling(result_string);
             }
             else {
                 if (resulting_string.size() > 1 && resulting_string.get(resulting_string.size() - 1).equals("[") &&
